@@ -1,7 +1,0 @@
-version: "3.9"  # Or your preferred version
-
-services:
-  web:
-    image: welcome-to-docker:latest  # Use a lightweight web server
-    ports:
-      - "8080:80"  # Map host port 8080 to container port 80
