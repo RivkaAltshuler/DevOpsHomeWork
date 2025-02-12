@@ -1,0 +1,8 @@
+version: "3.9"  # Or your preferred version
+
+services:
+  web:
+    image: welcome-to-docker:latest  # Use a lightweight web server
+    ports:
+      - "8089:3000"  
+
