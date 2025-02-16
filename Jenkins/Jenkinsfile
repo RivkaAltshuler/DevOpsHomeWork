@@ -1,0 +1,21 @@
+node {
+    
+    stage('checkout') {
+        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RivkaAltshuler/Stam/']])     
+    }
+
+    stage('Build') {        
+        bat("dotnet build ConsoleApp5.sln -c Release")		        
+		}
+		
+    stage('Publish') {
+        
+		createGitHubRelease commitish: 'main', credentialId: 'github-token', draft: false, name: 'release', prerelease: false, repository: 'RivkaAltshuler/Stam', tag: env.BUILD_TAG
+        
+        uploadGithubReleaseAsset credentialId: 'github-token', repository: 'RivkaAltshuler/Stam', tagName: env.BUILD_TAG, uploadAssets: [[filePath: env.WORKSPACE+'/ClassLibrary1Tests/bin/Release/ClassLibrary1Tests.dll']]		
+
+		}
+
+    }
+
+
