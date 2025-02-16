@@ -1,8 +1,23 @@
-version: "3.9"  # Or your preferred version
-
 services:
   web:
-    image: welcome-to-docker:latest  # Use a lightweight web server
+    build: ./web
     ports:
-      - "8089:3000"  
+      - "8081:8080"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:5432/counter_db
+    restart: on-failure # to handle cases that the database was not ready
 
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432" # Expose only if needed for external access (optional)
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: counter_db
+
+
+volumes:
+  db_data:
