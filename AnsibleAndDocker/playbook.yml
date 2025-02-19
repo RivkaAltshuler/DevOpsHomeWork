@@ -3,25 +3,16 @@
   tasks:
     - name: Bring down existing containers (if any)
       community.docker.docker_compose_v2:
-        project_src: .  # נתיב לתיקייה עם ה-docker-compose.yml
+        project_src: .  
         files:
           - compose.yml
         state: absent  
         
     - name: Bring up Docker Compose application # הרצת docker-compose
       community.docker.docker_compose_v2:
-        project_src: .  # נתיב לתיקייה עם ה-docker-compose.yml
+        project_src: .  
         files:
           - compose.yml
         state: present
    
-        # options: # אופציות נוספות (לא חובה)
-        #   - project_name: my_project  # שם פרויקט (אם רוצים אחרת)
-        #   - detached: yes # הפעלה ברקע (כמו docker-compose up -d)
-        #   - remove_orphans: yes # הסרת קונטיינרים "יתומים"
-        #   - environment:  # משתני סביבה
-        #       - VAR1=value1
-        #       - VAR2=value2
-        #   - dependencies: # תלויות בין סרביסים (כמו depends_on בקובץ)
-        #       - web:
-        #           - db
+  
